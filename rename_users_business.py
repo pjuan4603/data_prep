@@ -1,5 +1,14 @@
-def retrieve_data():
-    all_files = ['source_final_trimmed.txt', 'target_final_trimmed.txt']
+# Brian Juan / Feb 2020
+# Functionality: Reindex the users and businesses
+# Input Files:
+# Output Files:
+
+
+# Retrieve data from the given file name
+# Input: A list of two file names
+# Returns: Two list that contains source/target domain data
+def retrieve_data(all_files):
+
     source = []
     target = []
     for each_file in all_files:
@@ -29,6 +38,9 @@ def retrieve_data():
     return source, target
 
 
+# Reindex the users and business so the index numbers aren't jumping
+# Input: The desired data set
+# Returns: The data set after reindex
 def rename(data):
 
     user_dict = {}
@@ -55,21 +67,28 @@ def rename(data):
     return data
 
 
+# Generate output
+# Input: The reviews / The name of the output file
 def generate_output(reviews, file_name):
 
     with open(file_name + '.txt', 'w') as f:
         for review in reviews:
-            #print 'writing' + str(review[0]) + ',' + str(review[1]) + ',' + str(review[2])
+            # print 'writing' + str(review[0]) + ',' + str(review[1]) + ',' + str(review[2])
             f.write(str(review[0]) + ',' + str(review[1]) + ',' + str(review[2]) + '\n')
 
 
 def main():
-    source, target = retrieve_data()
+
+    """ YOU CAN CHANGE THE INPUT FILE NAME HERE IN all_files """
+    all_files = ['source_final_trimmed.txt', 'target_final_trimmed.txt']
+
+    source, target = retrieve_data(all_files)
     target = rename(target)
     source = rename(source)
 
-    generate_output(target, 'test_target')
-    generate_output(source, 'test_source')
+    """ YOU CAN CHANGE THE OUTPUT FILE NAME HERE"""
+    generate_output(target, 'renamed_target')
+    generate_output(source, 'renamed_source')
 
 
 main()

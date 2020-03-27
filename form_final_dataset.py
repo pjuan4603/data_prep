@@ -1,10 +1,15 @@
 # Brian Juan / Feb 2020
+# Functionality: Reindex the users and businesses
+# Input Files:
+# Output Files:
 import json
 
 
-def retrieve_data():
-    # all_files = ['source_final_trimmed.txt', 'target_final_trimmed.txt']
-    all_files = ['test_source.txt', 'test_target.txt']
+# Retrieve data from the given file name
+# Input: A list of two file names
+# Returns: Two list that contains source/target domain data
+def retrieve_data(all_files):
+
     source = []
     target = []
     for each_file in all_files:
@@ -34,6 +39,9 @@ def retrieve_data():
     return source, target
 
 
+# Count the number of users in the desired data set
+# Input: The list that needs to be counted
+# Returns: Amount of users
 def get_user_count(data):
     user_list = []
     count = 0
@@ -45,6 +53,9 @@ def get_user_count(data):
     return count
 
 
+# Count the number of businesses in the desired data set
+# Input: The list that needs to be counted
+# Returns: Amount of business
 def get_business_count(data):
     business_list = []
     count = 0
@@ -56,10 +67,16 @@ def get_business_count(data):
     return count
 
 
+# Count the number of reviews in the desired data set
+# Input: The list that needs to be counted
+# Returns: Amount of business
 def get_review_count(data):
     return len(data)
 
 
+# Separate the data 4/5 used for training and the rest for testing from a single user.
+# Input: A review list for a single user
+# Returns: Two lists - one for training and one for testing
 def form_train_test(review_list):
     train = []
     test = []
@@ -74,7 +91,7 @@ def form_train_test(review_list):
         test_amount = count/5
         train_amount = count - test_amount
 
-    # print 'Count = ' + str(count) + '\tCount/5 = ' + str((count/5)) + '\tTaAmount= ' + str(train_amount) + '\tTeAmount = ' + str(test_amount)
+    # print 'Count = ' + str(count) + '\tCount/5 = ' + str((count/5)) + '\tTrAmount= ' + str(train_amount) + '\tTeAmount = ' + str(test_amount)
 
     for i in range(0, train_amount):
         train.append(review_list[i])
@@ -85,6 +102,9 @@ def form_train_test(review_list):
     return train, test
 
 
+# Form the complete training and testing data sets
+# Input: Data from both domains
+# Returns: Two data set - one for training anf one for testing
 def divide_train_test(source, target):
     train = []
     test = []
@@ -132,6 +152,7 @@ def divide_train_test(source, target):
     return train, test
 
 
+# Generate a JSON output that matches the format of converting JSON to the MAT files
 def generate_json_output(user_count, source_count, target_count, train, test):
     print 'generate output'
 
@@ -151,19 +172,19 @@ def generate_json_output(user_count, source_count, target_count, train, test):
 
 
 def main():
-    source, target = retrieve_data()
 
-    print 'source: ' + str(len(source)) + 'target: ' + str(len(target))
+    """ YOU CAN CHANGE THE INPUT FILE NAME HERE IN all_files """
+    all_files = ['renamed_source.txt', 'renamed_target.txt']
+    source, target = retrieve_data(all_files)
+    user_count = get_user_count(target)
+    source_count = get_business_count(source)
+    target_count = get_business_count(target)
+    print 'User count: ' + str(user_count) + '\tSourceD review count: ' + str(source_count) + '\tTargetD review count: ' + str(target_count)
 
-    # user_count = get_user_count(target)
-    # source_count = get_business_count(source)
-    # target_count = get_business_count(target)
-    # print 'User count: ' + str(user_count) + '\tSourceD review count: ' + str(source_count) + '\tTargetD review count: ' + str(target_count)
+    train, test = divide_train_test(source, target)
+    print 'Train: ' + str(len(train)) + '\tTest: ' + str(len(test))
 
-    # train, test = divide_train_test(source, target)
-    # print 'Train: ' + str(len(train)) + '\tTest: ' + str(len(test))
-
-    # generate_json_output(user_count, source_count, target_count, train, test)
+    generate_json_output(user_count, source_count, target_count, train, test)
     print 'Done.'
 
 
