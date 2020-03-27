@@ -1,9 +1,8 @@
 # Brian Juan / Feb 2020
-import json
 
 
 def retrieve_data():
-    all_files = ['source.txt', 'target.txt']
+    all_files = ['source_business_trimmed.txt', 'target_business_trimmed.txt']
     source = []
     target = []
     for each_file in all_files:
@@ -14,8 +13,10 @@ def retrieve_data():
 
         for line in all_lines:
 
-            tokens = line.split('   ')
-            tokens[2] = tokens[2].splitlines()[0].split(' ')[1]
+            tokens = line.split(',')
+            tokens[2] = tokens[2].splitlines()[0]
+            # tokens = line.split('   ')
+            # tokens[2] = tokens[2].splitlines()[0].split(' ')[1]
             # print 'user:' + tokens[0] + '\tbusiness:' + tokens[1] + '\tratings:' + tokens[2]
 
             if file_name.__contains__('source'):
@@ -73,8 +74,8 @@ def main():
     source_user_list = user_more_3(source)
     target_user_list = user_more_3(target)
     shared_users = shared(source_user_list, target_user_list)
-    generate_output(source, shared_users, 'source_trimmed')
-    generate_output(target, shared_users, 'target_trimmed')
+    generate_output(source, shared_users, 'source_final_trimmed')
+    generate_output(target, shared_users, 'target_final_trimmed')
 
 
 main()
