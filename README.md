@@ -13,3 +13,11 @@ _The following code are for BPMF implementataion_
   
 ### Recommended Steps: 
 
+1. shared_users.py
+2. remove_bus_under_3.py
+3. remove_user_under_3.py
+4. rename_users_business.py
+
+_The following steps are for BPMF implementataion_  
+5. form_final_dataset.py
+6. from_json_to_mat.py
