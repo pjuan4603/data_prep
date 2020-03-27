@@ -1,3 +1,6 @@
 ## Data pre-processing for Amazon datasets
-### Files for each step
+These are the code used for preprocessing the data from Amazon datasets
+### Python codes:
+
+### Recommended Steps: 
 
