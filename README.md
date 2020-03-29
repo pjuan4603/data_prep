@@ -1,5 +1,5 @@
 ## Data pre-processing for Amazon datasets
-These are the code used for preprocessing the data from Amazon datasets
+These are the code used for preprocessing the data from Yelp datasets
 ### Python codes:
 
 **shared_users.py** : Extract the shared users from two domains.  
