@@ -1,4 +1,4 @@
-## Data pre-processing for Amazon datasets
+## Data pre-processing for Yelp datasets
 These are the code used for preprocessing the data from Yelp datasets
 ### Python codes:
 
